@@ -11,23 +11,22 @@ public:
 
         for(int i=0 ; i<s2.size() ; i++)
         {
-            ch2[s2[i]-'a']++;                       // add current char first
-
+            ch2[s2[i]-'a']++; 
             if(i >= s1.size())
             {
-                ch2[s2[i-s1.size()]-'a']--;          // remove char sliding out of window
+                ch2[s2[i-s1.size()]-'a']--;   
             }
 
-            if(i >= s1.size()-1)                     // window has reached full size
+            if(i >= s1.size()-1)       
             {
                 bool equal = true;
-                for(int k=0;k<26;k++)                // manual comparison, since arrays can't use ==
+                for(int k=0;k<26;k++)
                 {
                     if(ch[k]!=ch2[k]) { equal=false; break; }
                 }
                 if(equal) return true;
             }
         }
-        return false;                                 // added: fallback if no match found
+        return false;
     }
 };
