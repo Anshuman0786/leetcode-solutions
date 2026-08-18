@@ -6,11 +6,11 @@ public:
 
         for(int i = start; i < candidates.size(); i++)
         {
-            if(candidates[i] > target) break; // sorted, so no point going further
-            if(i > start && candidates[i] == candidates[i-1]) continue; // skip duplicates
+            if(candidates[i] > target) break; 
+            if(i > start && candidates[i] == candidates[i-1]) continue;
 
             temp.push_back(candidates[i]);
-            solve(i+1, candidates, target - candidates[i], result, temp); // no reuse: i+1
+            solve(i+1, candidates, target - candidates[i], result, temp); 
             temp.pop_back(); // backtrack
         }
     }
