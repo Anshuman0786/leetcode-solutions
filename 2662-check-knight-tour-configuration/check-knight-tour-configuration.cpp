@@ -2,45 +2,36 @@ class Solution {
 public:
     bool checkValidGrid(vector<vector<int>>& grid) {
         int n = grid.size();
-        pair<int,int> prev;
-        int step = 0;
+        int r = 0;
+        int c = 0;
 
-        for(int i=0;i<n;i++)
+        if(grid[0][0] != 0)
+            return false;
+        int dr[] = {1, 1, 2, 2, -1, -1, -2, -2};
+        int dc[] = {2, -2, 1, -1, 2, -2, 1, -1};
+
+        for(int step = 1; step < n*n; step++)
         {
-            for(int j=0;j<n;j++)
+            bool found = false;
+            for(int k = 0; k < 8; k++)
             {
-                if(step == 0 && grid[i][j] == step)
+                int nr = r + dr[k];
+                int nc = c + dc[k];
+                if(nr >= 0 && nr < n && nc >= 0 && nc < n)
                 {
-                    step++;
-                    prev = {i,j};
-                }
-                else if(grid[i][j] == step)
-                {
-                    int dr = abs(prev.first - i);
-                    int dc = abs(prev.second - j);
-
-                    if((dr==1 && dc==2) || (dr==2 && dc==1))
+                    if(grid[nr][nc] == step)
                     {
-                        step++;
-
-                        // Last number has been successfully checked
-                        if(step == n*n)
-                        {
-                            return true;
-                        }
-
-                        prev = {i,j};
-                        i=-1;
+                        r = nr;
+                        c = nc;
+                        found = true;
                         break;
-                    }
-                    else
-                    {
-                        return false;
                     }
                 }
             }
+            if(!found)
+                return false;
         }
 
-        return false;
+        return true;
     }
 };
